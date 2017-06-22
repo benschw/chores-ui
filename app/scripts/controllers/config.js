@@ -19,7 +19,7 @@ angular.module('choresApp')
 	var refreshChores = function() {
 		$http({
 			method: 'GET',
-			url: 'localhost:8080/api/chore'
+			url: '/api/chore'
 		}).then(function(response) {
 			$scope.chores = response.data;
 		}, function() {
@@ -32,7 +32,7 @@ angular.module('choresApp')
 		console.log([$scope.newDaily, choreType]);
 		var req = {
 			method: 'POST',
-			url: 'http://localhost:8080/api/chore',
+			url: '/api/chore',
 			data: { type: choreType, content: $scope.newDaily }
 		};
 
