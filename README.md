@@ -1,12 +1,9 @@
-# chores
+[![Build Status](https://travis-ci.org/benschw/chores-ui.svg?branch=master)](https://travis-ci.org/benschw/chores-ui)
 
-This project is generated with [yo angular generator](https://github.com/yeoman/generator-angular)
-version 0.16.0.
 
-## Build & development
+# chores ui
 
-Run `grunt` for building and `grunt serve` for preview.
 
-## Testing
-
-Running `grunt test` will run the unit tests with karma.
+	make deps
+	grunt serve
+	grunt build
