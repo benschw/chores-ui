@@ -15,6 +15,5 @@ deploy:
   bucket: chores.fliglio.com
   local-dir: dist
   upload-dir: "/"
-  acl: ''
   on:
     repo: benschw/chores-ui
