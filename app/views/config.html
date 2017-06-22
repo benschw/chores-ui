@@ -1,0 +1,11 @@
+<h2>Daily Chore</h2>
+<div class="input-group input-group-lg">
+	<input type="text" class="form-control" ng-model="newDaily" placeholder="Chore" aria-describedby="sizing-addon1">
+	<span class="input-group-btn">
+		<button class="btn btn-default" type="button" ng-click="addChore('daily')">Add</button>
+	</span>
+</div>
+
+<ul ng-repeat="thing in chores">
+	<li>{{thing}}</li>
+</ul>
