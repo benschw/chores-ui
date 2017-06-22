@@ -18,12 +18,9 @@ angular.module('choresApp', [
 	'ui.router'
 ])
 
-.config(function ($routeProvider, $stateProvider, $urlRouterProvider, $httpProvider) {
+.config(function ($routeProvider, $stateProvider, $urlRouterProvider) {
 	$urlRouterProvider
 		.otherwise('/');
-
-	$httpProvider.defaults.useXDomain = true;
-
 
 	$stateProvider
 		.state({

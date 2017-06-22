@@ -27,6 +27,7 @@ angular.module('choresApp')
 		});
 	};
 	
+	refreshChores();
 
 	$scope.addChore = function(choreType) {
 		console.log([$scope.newDaily, choreType]);
