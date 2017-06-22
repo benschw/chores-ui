@@ -15,7 +15,6 @@ deploy:
   bucket: chores.fliglio.com
   local-dir: dist
   skip_cleanup: true
-  upload-dir: ""
   acl: public_read
   on:
     repo: benschw/chores-ui
