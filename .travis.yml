@@ -1,0 +1,20 @@
+language: node_js
+node_js:
+    - "7"
+
+before_script:
+    - make deps
+script:
+    - grunt build
+
+deploy:
+  provider: s3
+  access_key_id: AKIAJWN36CZNBCQXFFTQ
+  secret_access_key:
+    secure: UqvslFO9/5PbYZ60J+CZmskjy1bnLVNmthm8XKnM8xkS/YGh0LzQYkmhxSi8UF9dobkSgDyctYBbBkTi7YsvJ/CyBtvymNgx3Ib1rCgf3aPrXc15GFlhpbcYp0aaQi92QT5nlFiTKoSrqTeS8pewjojFCBa/inYoBkB3QE8EfwpXQoCfzMZiuYFKzaGArcJ85t/eSC+P6BLJSMF3h1sOn/3EcQ41qAmLPDeEfwKTHIn0vmc1mmCozGToK5Ti0poX8FNfP/8n+WXSvpWu95C17TFMn0R9i/9y19iZLGmUHey7Q43Syx6oDsFIzbUEZuVHN4IhEsK9yKR+J+JMOEUcLcDxien6oCmLPGuTdDA1gWk99XyD4dShFTUzUahTG13EBivfS+Hj7Nf+XR7Q2qpzYOCULSkMtnZcH+/7pBntGWPtTAe44bO6axTd1FrijMzK1ESn5IsfKwnWo9AUEZin9+oX7R0FAPYHmSquwqvHozsVC1Cgtpoh7aoS8WCM0ejpKXRStexTq2WFU3Cn2DmeV2wdqRbzMDw8l+V2S8OOYXGyyqRxpQM+Qtb7bGfODcn5ViqcGdjcq11MQLc0QuxKjmAdOwKzsQ2U3USi1fy3LZXcHw2u12VXc0yeKOYClen8nLYyuKBg4arEIfnxuRQDKabBtLoYRMoOW3+M1M+HBSw=
+  bucket: chores.fliglio.com
+  local-dir: dist
+  upload-dir: "/"
+  acl: ''
+  on:
+    repo: benschw/chores-ui
