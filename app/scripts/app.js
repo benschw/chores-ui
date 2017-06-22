@@ -32,10 +32,10 @@ angular.module('choresApp', [
 			templateUrl: 'views/main.html'
 		})
 		.state({
-				name: 'about',
-				url: '/about',
-				controller: 'AboutCtrl',
-				templateUrl: 'views/about.html'
+				name: 'config',
+				url: '/config',
+				controller: 'ConfigCtrl',
+				templateUrl: 'views/config.html'
 		});
 
 });
