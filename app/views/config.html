@@ -9,4 +9,24 @@
 <ul ng-repeat="chore in chores">
 	<li>{{chore.content}}</li>
 </ul>
+ <div class="row" ng-repeat="thing in things">
+      <div class="col-sm-2">
+        <div class="form-group">
+          <input type="text"  class="form-control" placeholder="Type" ng-model="thing">
+        </div>
+      </div>
+      <div class="col-sm-7">
+        <div class="form-group">
+          <input type="text" class="form-control" placeholder="Url">
+        </div>
+      </div>
+      <div class="col-sm-3">
+        <div class="form-group">
+          <div class="btn-group" role="group" aria-label="manage repo">
 
+            <button type="submit" class="btn btn-default" role="group" ng-click="saveRepo(repo.id, repo.type, repo.url)">Save</button>
+            <button type="submit" class="btn btn-danger" role="group" ng-click="deleteRepo(repo.id)">Delete</button>
+          </div>
+        </div>
+      </div>
+    </div>

@@ -10,6 +10,11 @@
 angular.module('choresApp')
   .controller('ConfigCtrl', function ($scope, $http) {
 
+    $scope.things = [
+      'HTML5 Boilerplate',
+      'AngularJS',
+      'Karma'
+    ];
     $scope.chores = [
       'HTML5 Boilerplate',
       'AngularJS',
@@ -30,17 +35,24 @@ angular.module('choresApp')
 	refreshChores();
 
 	$scope.addChore = function(choreType) {
-		console.log([$scope.newDaily, choreType]);
-		var req = {
+		$http({
 			method: 'POST',
 			url: '/api/chore',
 			data: { type: choreType, content: $scope.newDaily }
-		};
-
-		$http(req).then(function(){
+		}).then(function(){
 			refreshChores();
 		}, function(){
 			console.log('error adding chore');
+		});
+	};
+	$scope.deleteChore = function(id) {
+		$http({
+			method: 'DELETE',
+			url: '/api/chore/' + id
+		}).then(function(){
+			refreshChores();
+		}, function(){
+			console.log('error removing chore');
 		});
 	};
 
