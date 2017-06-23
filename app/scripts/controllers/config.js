@@ -2,24 +2,23 @@
 
 /**
  * @ngdoc function
- * @name choresApp.controller:AboutCtrl
+ * @name choresApp.controller:ConfigCtrl
  * @description
- * # AboutCtrl
+ * # ConfigCtrl
  * Controller of the choresApp
  */
 angular.module('choresApp')
   .controller('ConfigCtrl', function ($scope, $http) {
 
-    $scope.things = [
-      'HTML5 Boilerplate',
-      'AngularJS',
-      'Karma'
-    ];
-    $scope.chores = [
-      'HTML5 Boilerplate',
-      'AngularJS',
-      'Karma'
-    ];
+
+
+    $scope.choreTypes = ['daily', 'weekly', 'monthly', 'yearly'];
+	$scope.newChores = {};
+	$scope.choreTypes.forEach(function(choreType) {
+	    $scope.newChores[choreType] = null;
+	});
+
+	$scope.chores = [];
 
 	var refreshChores = function() {
 		$http({
@@ -38,8 +37,9 @@ angular.module('choresApp')
 		$http({
 			method: 'POST',
 			url: '/api/chore',
-			data: { type: choreType, content: $scope.newDaily }
+			data: { type: choreType, content: $scope.newChores[choreType] }
 		}).then(function(){
+			$scope.newChores[choreType] = null;
 			refreshChores();
 		}, function(){
 			console.log('error adding chore');
@@ -55,10 +55,5 @@ angular.module('choresApp')
 			console.log('error removing chore');
 		});
 	};
-
-	$scope.newDaily = '';
-	$scope.newWeekly = '';
-	$scope.newMonthly = '';
-	$scope.newYearly = '';
-
+	
   });
