@@ -12,7 +12,13 @@ angular.module('choresApp').controller('MainCtrl', function ($scope, $http) {
 
 	var today = new Date();
 	today.setHours(0,0,0,0);
-	
+
+	var daysAgo = function(d) {
+		d.setHours(0,0,0,0);
+		var timeDiff = Math.abs(d.getTime() - today.getTime());
+		return Math.ceil(timeDiff / (1000 * 3600 * 24));
+	};
+
 	var processTasks = function(data) {
 		var tasks = [];
 		for (var i = 0; i < data.length; i++) {
@@ -27,7 +33,11 @@ angular.module('choresApp').controller('MainCtrl', function ($scope, $http) {
 				item.lastCompleted = d;
 			}
 			item.due = today.getTime() > item.lastCompleted.getTime();
-
+			if (daysAgo(item.lastCompleted) >= 2) {
+				item.className = 'list-group-item-danger';
+			} else if (daysAgo(item.lastCompleted) >= 2) {
+				item.className = 'list-group-item-warning';
+			}
 			tasks.push(item);
 		}
 		console.log(tasks);
