@@ -7,8 +7,7 @@
  * # ConfigCtrl
  * Controller of the choresApp
  */
-angular.module('choresApp')
-  .controller('ConfigCtrl', function ($scope, $http) {
+angular.module('choresApp').controller('ConfigCtrl', function ($scope, $http) {
 
 
 
@@ -56,4 +55,4 @@ angular.module('choresApp')
 		});
 	};
 	
-  });
+});

@@ -1,14 +1,32 @@
-<div class="jumbotron">
-  <h1>'Allo, 'Allo!</h1>
-  <p class="lead">
-    <img src="images/yeoman.png" alt="I'm Yeoman"><br>
-    Always a pleasure scaffolding your apps.
-  </p>
-  <p><a class="btn btn-lg btn-success" ng-href="#/">Splendid!<span class="glyphicon glyphicon-ok"></span></a></p>
-</div>
+<ul class="list-group">
+	<li class="list-group-item clearfix task-list" ng-repeat="task in tasks" ng-show="task.due">
+		<input class="pull-right" type="checkbox" value="" ng-click="doWork(task)" />
+		<label>{{task.content}}</label>
+	</li>
+	
+	<!-- Weekly -->
+	<button class="list-group-item clearfix task-list">
+		<span class="badge">14</span>
+		<label>Weekly</label>
+	</button>
+	
+	<!-- Monthly -->
+	<button class="list-group-item clearfix task-list">
+		<span class="badge">14</span>
+		<label>Monthly</label>
+	</button>
 
-<div class="row marketing">
-	<ul ng-repeat="thing in things">
-		<li>{{thing}}</li>
-	</ul>
-</div>
+	<!-- Yearly -->
+	<button class="list-group-item clearfix task-list">
+		<span class="badge">14</span>
+		<label>Yearly</label>
+	</button>
+</ul>
+
+<ul class="list-group">
+	<li class="list-group-item clearfix task-list disabled" ng-repeat="task in tasks" ng-hide="task.due">
+		<input class="pull-right" type="checkbox" value="" checked ng-click="undoWork(task)" />
+		<label>{{task.content}}</label>
+	</li>
+	
+</ul>
