@@ -27,11 +27,11 @@ angular.module('choresApp').controller('MainCtrl', function ($scope, $http) {
 				item.lastCompleted = new Date(item.tasks[0].time);
 				
 			} else {
-				var d = new Date();
-				d.setDate(d.getDate() - 400);
-
-				item.lastCompleted = d;
+				var t = new Date(item.created);
+				t.setHours(0,0,0,-1); // 1 ms before midnight to fake yesterday
+				item.lastCompleted = t;
 			}
+
 			item.due = today.getTime() > item.lastCompleted.getTime();
 			if (daysAgo(item.lastCompleted) >= 2) {
 				item.className = 'list-group-item-danger';
