@@ -1,81 +1,21 @@
 'use strict';
 
-angular.module('choresApp').factory('tasks', function($http) {
+angular.module('choresApp').factory('tasks', ['$http', 'ago', function($http, ago) {
 	var tasks = {};
 
-
-	var agoCalc = {
-		daily: function(d) {
-			var today = new Date();
-			today.setHours(0,0,0,0);
-			var timeDiff = Math.abs(d.getTime() - today.getTime());
-			return Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
-		},
-		weekly: function(d) {
-			var today = new Date();
-			var day = today.getDay(), diff = today.getDate() - day + (day === 0 ? -6:1); // adjust when day is sunday
-			today = new Date(today.setDate(diff));
-			console.log(d);
-
-		},
-		monthly: function(d) {
-			var today = new Date();
-			today = new Date(today.getFullYear(), today.getMonth(), 1);
-			console.log(d);
-		},
-		yearly: function(d) {
-			var today = new Date();
-			return today.getFullYear() - d.getFullYear();
-		}
-	};
-
-	var defaults = {
-		daily: function(item) {
-			var d = new Date(item.created);
-			d.setHours(0,0,0,-1); //1ms before midnight: yesterday
-			return d;
-		},
-		weekly: function(item) {
-			var date = new Date(item.created);
-			var day = date.getDay(), diff = date.getDate() - day + (day === 0 ? -6:1); // adjust when day is sunday
-			var d = new Date(date.setDate(diff));
-			d.setHours(0,0,0,-1); //1ms before midnight
-			return d;
-		},
-		monthly: function(item) {
-			var date = new Date(item.created);
-			var d = new Date(date.getFullYear(), date.getMonth(), 1);
-			d.setHours(0,0,0,-1); //1ms before midnight
-			return d;
-		},
-		yearly: function(item) {
-			var date = new Date(item.created);
-			var d = new Date(date.getFullYear(), 0, 1);
-			d.setHours(0,0,0,-1); //1ms before midnight
-			return d;
-		}
-	};
-
 	var getTaskStatus = function(item) {
-		var lastCompleted;
 
-		if (item.tasks && item.tasks.length > 0) {
-			lastCompleted = new Date(item.tasks[0].time);
-			lastCompleted.setHours(0,0,0,0);
-		} else {
-			lastCompleted = defaults[item.type](item);
-		}
-		var ago = agoCalc[item.type](lastCompleted);
+		var unitsSince = ago(item);
 		
 		var due;
 		var overdue;
-		if (ago < 1) {
+		if (unitsSince < 1) {
 			due = false;
 			overdue = 0;
-		} else if (ago < 2) {
+		} else if (unitsSince < 2) {
 			due = true;
 			overdue = 0;
-		} else if (ago < 3) {
+		} else if (unitsSince < 3) {
 			due = true;
 			overdue = 1;
 		} else {
@@ -149,5 +89,5 @@ angular.module('choresApp').factory('tasks', function($http) {
 			console.log(['undoWork', task.id]);
 		}
 	};
-});
+}]);
 
