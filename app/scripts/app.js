@@ -23,10 +23,28 @@ angular.module('choresApp', [
 
 	$stateProvider
 		.state({
-			name: 'home',
+			name: 'daily',
 			url: '/',
-			controller: 'MainCtrl',
-			templateUrl: 'views/main.html'
+			controller: 'TaskCtrl',
+			templateUrl: 'views/daily.html'
+		})
+		.state({
+			name: 'weekly',
+			url: '/weekly/',
+			controller: 'TaskCtrl',
+			templateUrl: 'views/weekly.html'
+		})
+		.state({
+			name: 'monthly',
+			url: '/monthly/',
+			controller: 'TaskCtrl',
+			templateUrl: 'views/monthly.html'
+		})
+		.state({
+			name: 'yearly',
+			url: '/yearly/',
+			controller: 'TaskCtrl',
+			templateUrl: 'views/yearly.html'
 		})
 		.state({
 				name: 'config',
