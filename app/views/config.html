@@ -4,10 +4,12 @@
 
 		<div class="list-group">
 			<span ng-repeat="chore in chores">
-				<a class="list-group-item" ng-show="chore.type == choreType" ng-click="chore.edit = !chore.edit" ng-hide="chore.edit">
+				<a class="list-group-item"
+					ng-show="(chore.type == choreType) && !chore.edit"
+					 ng-click="chore.edit = !chore.edit">
 					{{chore.content}}
 				</a>
-				<div class="list-group-item" ng-show="chore.edit">
+				<div class="list-group-item" ng-show="chore.edit && (chore.type == choreType)">
 					<div class="input-group">
 						<input type="text" class="form-control" ng-model="chore.content" />
 						<span class="input-group-btn">
