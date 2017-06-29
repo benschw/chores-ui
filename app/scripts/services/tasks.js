@@ -1,50 +1,50 @@
 'use strict';
 
 angular.module('choresApp').factory('tasks', ['$http', 'ago', function($http, ago) {
+	var types = ['daily', 'weekly', 'monthly', 'yearly'];
 	var tasks = {};
-
-	var getTaskStatus = function(item) {
-
-		var unitsSince = ago(item);
-		
-		var due;
-		var overdue;
-		if (unitsSince < 1) {
-			due = false;
-			overdue = 0;
-		} else if (unitsSince < 2) {
-			due = true;
-			overdue = 0;
-		} else if (unitsSince < 3) {
-			due = true;
-			overdue = 1;
-		} else {
-			due = true;
-			overdue = 2;
-		}
-
+	
+	var newModel = function() {
 		return {
-			due: due,
-			overdue : overdue
+			complete: 0,
+			statusClassName: '',
+			mostOverdue: 0,
+			tasks: []
 		};
 	};
 
+	var resetModel = function() {
+		for (var i=0; i<types.length; i++) {
+			tasks[types[i]] = newModel();
+		}
+	};
+	resetModel();
+
 	var processTasks = function(data) {
-		tasks.daily = [];
-		tasks.weekly = [];
-		tasks.monthly = [];
-		tasks.yearly = [];
+		resetModel();
+
 		for (var i = 0; i < data.length; i++) {
 			var item = data[i];
-			var s = getTaskStatus(item);
+			var lastCompleted = ago(item);
 			
-			item.due = s.due;
-			if (s.overdue >= 2) {
+			item.due = lastCompleted >= 1;
+			if (lastCompleted >= 3) {
 				item.className = 'list-group-item-danger';
-			} else if (s.overdue === 1) {
+			} else if (lastCompleted === 2) {
 				item.className = 'list-group-item-warning';
 			}
-			tasks[item.type].push(item);
+			tasks[item.type].mostOverdue = Math.max(tasks[item.type].mostOverdue, lastCompleted);
+			if (!item.due) {
+				tasks[item.type].complete++;
+			}
+			tasks[item.type].tasks.push(item);
+		}
+		for (i=0; i<types.length; i++) {
+			if (tasks[types[i]].mostOverdue >= 3) {
+				tasks[types[i]].statusClassName = 'list-group-item-danger';
+			} else if (tasks[types[i]].mostOverdue === 2) {
+				tasks[types[i]].statusClassName = 'list-group-item-warning';
+			}
 		}
 		console.log(tasks);
 	};

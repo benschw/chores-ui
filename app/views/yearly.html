@@ -1,7 +1,7 @@
 <h1>Weekly</h1>
 <ul class="list-group">
 	<!-- due daily -->
-	<li class="list-group-item clearfix task-list {{task.className}}" ng-repeat="task in tasks.yearly" ng-show="task.due">
+	<li class="list-group-item clearfix task-list {{task.className}}" ng-repeat="task in tasks.yearly.tasks" ng-show="task.due">
 		<input class="pull-right" type="checkbox" value="" ng-click="doWork(task)" />
 		<label>{{task.content}}</label>
 	</li>
@@ -9,7 +9,7 @@
 
 <ul class="list-group">
 	<!-- complete daily -->
-	<li class="list-group-item clearfix task-list disabled" ng-repeat="task in tasks.yearly" ng-hide="task.due">
+	<li class="list-group-item clearfix task-list disabled" ng-repeat="task in tasks.yearly.tasks" ng-hide="task.due">
 		<input class="pull-right" type="checkbox" value="" checked ng-click="undoWork(task)" />
 		<label>{{task.content}}</label>
 	</li>

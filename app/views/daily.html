@@ -1,33 +1,33 @@
 <h1>Chores</h1>
 <ul class="list-group">
 	<!-- due daily -->
-	<li class="list-group-item clearfix task-list {{task.className}}" ng-repeat="task in tasks.daily" ng-show="task.due">
+	<li class="list-group-item clearfix task-list {{task.className}}" ng-repeat="task in tasks.daily.tasks" ng-show="task.due">
 		<input class="pull-right" type="checkbox" value="" ng-click="doWork(task)" />
 		<label>{{task.content}}</label>
 	</li>
 	
 	<!-- Weekly -->
 	<a ui-sref="weekly" class="list-group-item">
-		<span class="badge">{{tasks.weekly.length}}</span>
+		<span class="badge">{{tasks.weekly.complete}} / {{tasks.weekly.tasks.length}}</span>
 		<label>Weekly</label>
 	</a>
 	
 	<!-- Monthly -->
 	<a ui-sref="monthly" class="list-group-item">
-		<span class="badge">{{tasks.monthly.length}}</span>
+		<span class="badge">{{tasks.monthly.complete}} / {{tasks.monthly.tasks.length}}</span>
 		<label>Monthly</label>
 	</a>
 
 	<!-- Yearly -->
 	<a ui-sref="yearly" class="list-group-item">
-		<span class="badge">{{tasks.yearly.length}}</span>
+		<span class="badge">{{tasks.yearly.complete}} / {{tasks.yearly.tasks.length}}</span>
 		<label>Yearly</label>
 	</a>
 </ul>
 
 <ul class="list-group">
 	<!-- complete daily -->
-	<li class="list-group-item clearfix task-list disabled" ng-repeat="task in tasks.daily" ng-hide="task.due">
+	<li class="list-group-item clearfix task-list disabled" ng-repeat="task in tasks.daily.tasks" ng-hide="task.due">
 		<input class="pull-right" type="checkbox" value="" checked ng-click="undoWork(task)" />
 		<label>{{task.content}}</label>
 	</li>
