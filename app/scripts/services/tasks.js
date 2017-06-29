@@ -40,7 +40,10 @@ angular.module('choresApp').factory('tasks', ['$http', 'ago', function($http, ag
 			tasks[item.type].tasks.push(item);
 		}
 		for (i=0; i<types.length; i++) {
-			if (tasks[types[i]].mostOverdue >= 3) {
+			console.log(['huh', tasks[types[i]].complete, tasks[types[i]].tasks.length]);
+			if (tasks[types[i]].complete === tasks[types[i]].tasks.length) {
+				tasks[types[i]].statusClassName = 'list-group-item-success';
+			} else if (tasks[types[i]].mostOverdue >= 3) {
 				tasks[types[i]].statusClassName = 'list-group-item-danger';
 			} else if (tasks[types[i]].mostOverdue === 2) {
 				tasks[types[i]].statusClassName = 'list-group-item-warning';

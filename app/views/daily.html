@@ -7,19 +7,19 @@
 	</li>
 	
 	<!-- Weekly -->
-	<a ui-sref="weekly" class="list-group-item">
+	<a ui-sref="weekly" class="list-group-item {{tasks.weekly.statusClassName}}">
 		<span class="badge">{{tasks.weekly.complete}} / {{tasks.weekly.tasks.length}}</span>
 		<label>Weekly</label>
 	</a>
 	
 	<!-- Monthly -->
-	<a ui-sref="monthly" class="list-group-item">
+	<a ui-sref="monthly" class="list-group-item {{tasks.monthly.statusClassName}}">
 		<span class="badge">{{tasks.monthly.complete}} / {{tasks.monthly.tasks.length}}</span>
 		<label>Monthly</label>
 	</a>
 
 	<!-- Yearly -->
-	<a ui-sref="yearly" class="list-group-item">
+	<a ui-sref="yearly" class="list-group-item {{tasks.yearly.statusClassName}}">
 		<span class="badge">{{tasks.yearly.complete}} / {{tasks.yearly.tasks.length}}</span>
 		<label>Yearly</label>
 	</a>
