@@ -1,24 +1,41 @@
 <div ng-repeat="choreType in choreTypes">
 		<h2 class="panel-title">{{choreType}} chores</h2>
 		<br />
-		<div class="input-group input-group-lg">
-			<input type="text" class="form-control" ng-model="newChores[choreType]" placeholder="Chore" aria-describedby="sizing-addon1">
-			<span class="input-group-btn">
-				<button class="btn btn-default" type="button" ng-click="addChore(choreType)">Add</button>
-			</span>
-		</div>
-		<br />
 
-		<ul class="list-group">
-			<li class="list-group-item clearfix" ng-repeat="chore in chores" ng-show="chore.type == choreType">
-				{{chore.content}}
-				<span class="pull-right">
-					<span class="btn btn-xs btn-danger" ng-click="deleteChore(chore.id)">
-						<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+		<div class="list-group">
+			<span ng-repeat="chore in chores">
+				<a class="list-group-item" ng-show="chore.type == choreType" ng-click="chore.edit = !chore.edit" ng-hide="chore.edit">
+					{{chore.content}}
+				</a>
+				<div class="list-group-item" ng-show="chore.edit">
+					<div class="input-group">
+						<input type="text" class="form-control" ng-model="chore.content" />
+						<span class="input-group-btn">
+							<button class="btn btn-default" type="button" ng-click="saveChore(chore)" title="Save">
+								<span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+							</button>
+							<button class="btn btn-default" type="button" ng-click="deleteChore(chore.id)" title="Delete">
+								<span class="glyphicon glyphicon-minus" aria-hidden="true"></span>
+							</button>
+							<button class="btn btn-default" type="button" ng-click="chore.edit = !chore.edit" title="Cancel">
+								<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+							</button>
+						</span>
+					</div>
+				</div>
+			</span>
+			<div class="list-group-item">
+				<div class="input-group">
+					<input type="text" class="form-control" ng-model="newChores[choreType]" placeholder="New Chore" aria-describedby="sizing-addon1">
+					<span class="input-group-btn">
+						<button class="btn btn-default" type="button" ng-click="addChore(choreType)">
+							<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+						</button>
 					</span>
-				</span>
-			</li>
-		</ul>
+				</div>
+			</div>
+		</div>
+
 
 	<hr />
 </div>

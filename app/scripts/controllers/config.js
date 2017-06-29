@@ -44,6 +44,17 @@ angular.module('choresApp').controller('ConfigCtrl', function ($scope, $http) {
 			console.log('error adding chore');
 		});
 	};
+	$scope.saveChore = function(chore) {
+		$http({
+			method: 'PUT',
+			url: '/api/chore/' + chore.id,
+			data: chore
+		}).then(function(){
+			refreshChores();
+		}, function(){
+			console.log('error adding chore');
+		});
+	};
 	$scope.deleteChore = function(id) {
 		$http({
 			method: 'DELETE',
